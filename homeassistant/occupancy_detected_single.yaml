@@ -1,6 +1,6 @@
 blueprint:
-  name: Motion-activated Light
-  description: Turn on a light when motion is detected.
+  name: Occupancy-activated Light
+  description: Turn on a light when occupancy is detected.
   domain: automation
   source_url: https://github.com/home-assistant/core/blob/dev/homeassistant/components/automation/blueprints/motion_light.yaml
   input:
@@ -18,7 +18,7 @@ blueprint:
             domain: light
     no_motion_wait:
       name: Wait time
-      description: Time to leave the light on after last motion is detected.
+      description: Time to leave the light on after last occupancy is detected.
       default: 120
       selector:
         number:
@@ -41,7 +41,7 @@ action:
   - alias: "Turn on the light"
     service: light.turn_on
     target: !input light_target
-  - alias: "Wait until there is no motion from device"
+  - alias: "Wait until there is no occupancy from device"
     wait_for_trigger:
       platform: state
       entity_id: !input motion_entity
